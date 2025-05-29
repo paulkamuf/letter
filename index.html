@@ -34,7 +34,7 @@
         }
 
         input#companyHandle {
-            width: 120px;
+            width: 115px;
         }
 
         .text-line {
@@ -67,13 +67,13 @@
 
         .button-container {
             display: flex;
-            justify-content: flex-start;
-            gap: 10px;
-            flex-wrap: wrap;
+            flex-direction: column;
+            align-items: flex-start;
         }
     </style>
 </head>
 <body>
+    <h1 style="text-align: left; font-size: 2em; margin-bottom: 20px;">Tell Them How You Feel!</h1>
 <div class="container">
     <form id="letterForm">
         <p class="text-line">
@@ -82,12 +82,12 @@
                 <option>Dear</option>
                 <option>GM</option>
             </select>
-            @<input type="text" id="companyHandle" placeholder="Company Handle">
+            @<input type="text" id="companyHandle" placeholder="User Name">
             , as a
             <select id="dedication">
                 <option>dedicated</option>
-                <option>fair-weather</option>
-                <option>subscribing</option>
+                <option>ad-supported tier subscribing</option>
+                <option>founding member tier</option>
             </select>
             <select id="role">
                 <option>customer</option>
@@ -120,6 +120,7 @@
                 <option>media outlet</option>
                 <option>agency</option>
                 <option>influencer house</option>
+                <option>substack</option>
             </select>
             is still
             <select id="activity">
@@ -133,7 +134,7 @@
                 <option>spreading of hate speech</option>
                 <option>misogynistic comments</option>
                 <option>targeting of individuals</option>
-                <option>firing people</option>
+                <option>firing hard working people</option>
                 <option>killing poor people via shuttering US AID</option>
                 <option>repeated  lying</option>
                 <option>abandoning his own children</option>
@@ -181,7 +182,7 @@
                 <option>respect</option>
                 <option>truth</option>
                 <option>community</option>
-                <option>maximizing impressions</option>
+                <option>impression maximization</option>
             </select>
             that
             <select id="source">
@@ -200,7 +201,7 @@
                 <option>simply</option>
             </select>
             <select id="damage">
-                <option>building his wealth</option>
+                <option>encouraging bad behavior</option>
                 <option>shoveling accelerants onto the social media conflagration</option>
                 <option>destroying humanity tweet by tweet</option>
             </select>
@@ -209,9 +210,9 @@
                 <option>an intolerant and corrupt society</option>
                 <option>a general mal de vivre</option>
                 <option>Weltschmerz</option>
-            </select>
+            </select>.
         </p>
-        <p class="text-line">
+        <p class="text-line" style="margin-top: 1em;">
             I
             <select id="target">
                 <option>respectfully ask</option>
@@ -242,33 +243,35 @@
             by
             <select id="audience">
                 <option>standing</option>
-                <option>vibing</option>
-                <option>showing out</option>
+                <option>sitting</option>
+                <option>changing your profile pic along</option>
             </select>
             with
-            <select id="expectation">
+            <select id="community">
                 <option>customers</option>
                 <option>the public</option>
-                <option>the loudest segment of users</option>
+                <option>users that are not bots</option>
             </select>
             who
             <select id="expectation">
                 <option>expect better</option>
-                <option>have time to write letters</option>
+                <option>are scared and don't know what else to do</option>
             </select>.
             #DeleteX
         </p>
         <div class="button-container">
             <button type="button" onclick="generateLetter()">Generate Complaint Letter</button>
         </div>
-        <textarea id="output" readonly></textarea>
-        <button type="button" onclick="copyToClipboard()">Copy</button>
     </form>
+    <textarea id="output" readonly></textarea>
+    <div class="button-container">
+        <button type="button" onclick="copyToClipboard()">Copy</button>
+    </div>
 </div>
 
 <script>
 function generateLetter() {
-    const ids = ["greeting","companyHandle","dedication","role","duration","durationUnit","disappointment","action","brandType","activity","offense","support","comparison","contrast","valueSet","virtues","source","claim","only","damage","contribution","target","actionRequest","platform","leadership","gesture","audience","expectation"];
+    const ids = ["greeting","companyHandle","dedication","role","duration","durationUnit","disappointment","action","brandType","activity","offense","support","comparison","contrast","valueSet","virtues","source","claim","only","damage","contribution","target","actionRequest","platform","leadership","gesture","audience","community","expectation"];
     const values = {};
     ids.forEach(id => {
         const el = document.getElementById(id);
@@ -277,7 +280,7 @@ function generateLetter() {
 
     const letter = `${values.greeting} @${values.companyHandle}, as a ${values.dedication} ${values.role} for the past ${values.duration} ${values.durationUnit}, I was ${values.disappointment} when I ${values.action} your ${values.brandType} is still ${values.activity} on X. Given Elon Musk’s ${values.offense}, continuing to ${values.support} here ${values.comparison} ${values.contrast} in relation to the ${values.valueSet} of ${values.virtues} that ${values.source} ${values.claim}. By using X you are not ${values.only} ${values.damage} but also contributing to ${values.contribution}.
 
-I ${values.target} ${values.actionRequest} to ${values.platform} your presence on this ${values.leadership} and ${values.gesture} by ${values.audience} with ${values.expectation} who ${values.expectation}. #DeleteX`;
+I ${values.target} ${values.actionRequest} to ${values.platform} your presence on this ${values.leadership} and ${values.gesture} by ${values.audience} with ${values.community} who ${values.expectation}. #DeleteX`;
 
     document.getElementById("output").value = letter;
 }
@@ -285,7 +288,7 @@ I ${values.target} ${values.actionRequest} to ${values.platform} your presence o
 function copyToClipboard() {
     const output = document.getElementById("output");
     output.select();
-    output.setSelectionRange(0, 99999);
+    output.setSelectionRange(0, 99999); // For mobile devices
     navigator.clipboard.writeText(output.value).then(() => {
         alert("Letter copied to clipboard.");
     }).catch(err => {
