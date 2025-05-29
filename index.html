@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shame A Brand Letter Writing Helper</title>
+    <title>Complaint Letter Generator</title>
     <style>
         body {
             background: #ffffff;
@@ -44,7 +44,7 @@
         }
 
         button {
-            margin-top: 20px;
+            margin-top: 10px;
             background-color: #007bff;
             color: white;
             border: none;
@@ -67,11 +67,9 @@
 
         .button-container {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 10px;
-            flex-direction: column;
+            justify-content: flex-start;
             gap: 10px;
+            flex-wrap: wrap;
         }
     </style>
 </head>
@@ -89,7 +87,7 @@
             <select id="dedication">
                 <option>dedicated</option>
                 <option>fair-weather</option>
-                <option>recent</option>
+                <option>subscribing</option>
             </select>
             <select id="role">
                 <option>customer</option>
@@ -139,18 +137,25 @@
                 <option>killing poor people via shuttering US AID</option>
                 <option>repeated  lying</option>
                 <option>abandoning his own children</option>
-                <option>paying off people</option>
+                <option>paying people off</option>
                 <option>egomaniacal behavior</option>
                 <option>being an arch capitalist</option>
                 <option>having no empathy</option>
                 <option>working with Donald Trump</option>
                 <option>ruining Tesla</option>
+                <option>having fake hair</option>
+                <option>shirking his CEO duties</option>
+                <option>ruining Twitter</option>
+                <option>union busting</option>
+                <option>sartorial offenses</option>
+                <option>instigating the refugee status of Afrikaners</option>
+                <option>promoting the stolen election lie</option>
             </select>,
             continuing to
             <select id="support">
                 <option>advertise</option>
                 <option>promote</option>
-                <option>attempt to 10x growth</option>
+                <option>attempt 10x growth</option>
             </select>
             here
             <select id="comparison">
@@ -163,7 +168,7 @@
                 <option>weird</option>
                 <option>awkward?</option>
             </select>
-            in contrast to the
+            in relation to the
             <select id="valueSet">
                 <option>values</option>
                 <option>vibes</option>
@@ -206,10 +211,12 @@
                 <option>Weltschmerz</option>
             </select>
         </p>
-        <p class="text-line" style="margin-top: 1.5em;">
+        <p class="text-line">
             I
             <select id="target">
                 <option>respectfully ask</option>
+                <option>somewhat respectfully ask</option>
+                <option>dare</option>
             </select>
             <select id="actionRequest">
                 <option>you</option>
@@ -245,32 +252,32 @@
                 <option>the loudest segment of users</option>
             </select>
             who
-            <select id="expectation2">
+            <select id="expectation">
                 <option>expect better</option>
                 <option>have time to write letters</option>
             </select>.
             #DeleteX
         </p>
-       <div class="button-container" style="justify-content: flex-start; gap: 10px; flex-wrap: wrap;">
-    <button type="button" onclick="generateLetter()">Generate Complaint Letter</button>
-</div>
-<textarea id="output" readonly></textarea>
-<button type="button" onclick="copyToClipboard()">Copy</button>
+        <div class="button-container">
+            <button type="button" onclick="generateLetter()">Generate Complaint Letter</button>
+        </div>
+        <textarea id="output" readonly></textarea>
+        <button type="button" onclick="copyToClipboard()">Copy</button>
     </form>
 </div>
 
 <script>
 function generateLetter() {
-    const ids = ["greeting","companyHandle","dedication","role","duration","durationUnit","disappointment","action","brandType","activity","offense","support","comparison","contrast","valueSet","virtues","source","claim","only","damage","contribution","target","actionRequest","platform","leadership","gesture","audience","expectation","expectation2"];
+    const ids = ["greeting","companyHandle","dedication","role","duration","durationUnit","disappointment","action","brandType","activity","offense","support","comparison","contrast","valueSet","virtues","source","claim","only","damage","contribution","target","actionRequest","platform","leadership","gesture","audience","expectation"];
     const values = {};
     ids.forEach(id => {
         const el = document.getElementById(id);
         values[id] = el.value;
     });
 
-    const letter = `${values.greeting} @${values.companyHandle}, as a ${values.dedication} ${values.role} for the past ${values.duration} ${values.durationUnit}, I was ${values.disappointment} when I ${values.action} your ${values.brandType} is still ${values.activity} on X. Given Elon Musk’s ${values.offense}, continuing to ${values.support} here ${values.comparison} ${values.contrast} in contrast to the ${values.valueSet} of ${values.virtues} that ${values.source} ${values.claim}. By using X you are not ${values.only} ${values.damage} but also contributing to ${values.contribution}.
+    const letter = `${values.greeting} @${values.companyHandle}, as a ${values.dedication} ${values.role} for the past ${values.duration} ${values.durationUnit}, I was ${values.disappointment} when I ${values.action} your ${values.brandType} is still ${values.activity} on X. Given Elon Musk’s ${values.offense}, continuing to ${values.support} here ${values.comparison} ${values.contrast} in relation to the ${values.valueSet} of ${values.virtues} that ${values.source} ${values.claim}. By using X you are not ${values.only} ${values.damage} but also contributing to ${values.contribution}.
 
-I ${values.target} ${values.actionRequest} to ${values.platform} your presence on this ${values.leadership} and ${values.gesture} by ${values.audience} with ${values.expectation} who ${values.expectation2}. #DeleteX`;
+I ${values.target} ${values.actionRequest} to ${values.platform} your presence on this ${values.leadership} and ${values.gesture} by ${values.audience} with ${values.expectation} who ${values.expectation}. #DeleteX`;
 
     document.getElementById("output").value = letter;
 }
